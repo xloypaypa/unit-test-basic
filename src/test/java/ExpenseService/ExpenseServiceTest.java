@@ -5,6 +5,7 @@ import ExpenseService.Project.Project;
 import ExpenseService.Project.ProjectType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 class ExpenseServiceTest {
     @Test
@@ -41,8 +42,9 @@ class ExpenseServiceTest {
         Project project = new Project(ProjectType.UNEXPECTED_PROJECT_TYPE, "name");
 
         // when
+        Executable when = () -> ExpenseService.getExpenseCodeByProjectTypeAndName(project);
 
         // then
-        Assertions.assertThrows(UnexpectedProjectTypeException.class, () -> ExpenseService.getExpenseCodeByProjectTypeAndName(project));
+        Assertions.assertThrows(UnexpectedProjectTypeException.class, when);
     }
 }
